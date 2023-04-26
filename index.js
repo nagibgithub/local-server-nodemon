@@ -23,13 +23,17 @@ app.get('/news', (req, res) => {
 app.get('/news/:newsId', (req, res) => {
     const id = req.params.newsId
     const idNews = newsData.find(pd => pd._id === id)
-    res.send(idNews)
+    res.send(idNews);
 });
 
 app.get('/categories/:categoryId', (req, res) => {
     const id = req.params.categoryId
-    const categoryNews = newsData.filter(pd => pd.category_id === id)
-    res.send(categoryNews)
+    if (id == 0) {
+        res.send(newsData);
+    } else {
+        const categoryNews = newsData.filter(pd => pd.category_id === id);
+        res.send(categoryNews);
+    }
 })
 
 app.listen(port, () => {
