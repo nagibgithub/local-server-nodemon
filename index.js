@@ -17,7 +17,7 @@ app.get('/categories', (req, res) => {
 });
 
 app.get('/news', (req, res) => {
-    res.send(newsData); 
+    res.send(newsData);
 });
 
 app.get('/news/:newsId', (req, res) => {
@@ -34,6 +34,16 @@ app.get('/categories/:categoryId', (req, res) => {
         const categoryNews = newsData.filter(pd => pd.category_id === id);
         res.send(categoryNews);
     }
+})
+
+app.get('/tranding', (req, res) => {
+    const trandingNews = newsData.filter(pd => pd.others_info.is_trending === true)
+    res.send(trandingNews)
+})
+
+app.get('/todays', (req, res) => {
+    const trandingNews = newsData.filter(pd => pd.others_info.is_todays_pick === true)
+    res.send(trandingNews)
 })
 
 app.listen(port, () => {
